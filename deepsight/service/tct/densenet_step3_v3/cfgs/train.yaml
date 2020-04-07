@@ -1,0 +1,38 @@
+DataRoot: /root/zhoum/CC/densenet_step3_v3
+Data_CLASSES: ['0', '1']
+class_to_ind: # normal cell: 0, abnormal: 1, H-SIL: 2, Candida: 3, fungi: 4, Herpesviruses: 5
+    'normal': 0
+    'abnormal': 1 # abnormal cell will be removed
+image_ext: '.jpg'
+img_dir: /mnt/zhoum/train_shiyetu_step3/img
+annt_dir: /mnt/zhoum/train_shiyetu_step3/annt
+arch: 
+GPUs: [0]
+num_workers: 0
+Means: [0.485, 0.456, 0.406] 
+Stds: [0.229, 0.224, 0.225]
+img_size: [224, 224]
+length: 16    # video length
+log: log.txt
+Train:
+  batchsize: 1
+  ### please better use the pretrained model. If not, leave this item empty 
+  pretrained: 
+  # pretrained: 
+  ###
+  resume:
+  optim: SGD
+  lr: 0.00001
+  weight_decay: 0.00005
+  momentum: 0.9
+  ### data augmentation parameters
+
+  trainSet: train.txt
+  valSet: valid.txt 
+  num_epoch: 1000
+  lr_decay_period: 100
+  db_reload_period: 10000
+  print_freq: 10
+  save_model_freq: 10
+Test:
+  testSet: test.txt
